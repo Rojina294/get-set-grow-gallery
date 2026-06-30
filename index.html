@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Get Set Grow Photo Gallery</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body oncontextmenu="return false">
+  <section id="loginScreen" class="login-screen">
+    <div class="login-card">
+      <img src="assets/logo.png" alt="Get Set Grow logo" class="login-logo" />
+      <h1>Photo Gallery</h1>
+      <p>Private gallery for Get Set Grow Early Learning Centre.</p>
+      <input type="password" id="passwordInput" placeholder="Enter educator or parent password" onkeydown="if(event.key==='Enter') checkPassword()" />
+      <button onclick="checkPassword()">Open Gallery</button>
+      <small id="errorMsg"></small>
+    </div>
+  </section>
+
+  <main id="galleryApp" class="hidden">
+    <header class="top-header">
+      <div class="brand">
+        <img src="assets/logo.png" alt="Get Set Grow logo" />
+        <div>
+          <h1>Get Set Grow</h1>
+          <p id="modeText">Childcare Cloud Photo Gallery</p>
+        </div>
+      </div>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </header>
+
+    <section id="roomScreen" class="room-screen">
+      <h2>Choose a Room</h2>
+      <p>Select the room gallery you want to open.</p>
+      <div class="room-grid">
+        <button class="room-card" onclick="chooseRoom('baby')">👶<span>Baby Room</span></button>
+        <button class="room-card" onclick="chooseRoom('toddler')">🚶<span>Toddler Room</span></button>
+        <button class="room-card" onclick="chooseRoom('preschool')">🎓<span>Preschool Room</span></button>
+      </div>
+    </section>
+
+    <section id="categoryArea" class="hidden">
+      <div class="room-bar">
+        <button class="back-btn" onclick="backToRooms()">← Change Room</button>
+        <h2 id="roomTitle">Baby Room</h2>
+      </div>
+
+      <nav class="tabs">
+        <button class="tab active" onclick="showCategory('events', this)">Events</button>
+        <button class="tab" onclick="showCategory('awards', this)">Awards</button>
+        <button class="tab" onclick="showCategory('activities', this)">Everyday Activities</button>
+      </nav>
+
+      <section class="hero">
+        <h2 id="categoryTitle">Events</h2>
+        <p id="categoryText">Special celebrations, family days, cultural events and centre moments.</p>
+        <p id="cloudStatus" class="cloud-status">Choose a room to load photos.</p>
+      </section>
+
+      <section id="events" class="gallery category active-category">
+        <article class="photo-card upload-card educator-only" data-category="events">
+          <div>
+            <strong>+ Add Event Photos</strong>
+            <span>Drag & drop or tap to upload</span>
+          </div>
+          <input id="eventUpload" type="file" accept="image/*" multiple onchange="uploadImages(event, 'events')" />
+        </article>
+      </section>
+
+      <section id="awards" class="gallery category">
+        <article class="photo-card upload-card educator-only" data-category="awards">
+          <div>
+            <strong>+ Add Award Photos</strong>
+            <span>Drag & drop or tap to upload</span>
+          </div>
+          <input id="awardUpload" type="file" accept="image/*" multiple onchange="uploadImages(event, 'awards')" />
+        </article>
+      </section>
+
+      <section id="activities" class="gallery category">
+        <article class="photo-card upload-card educator-only" data-category="activities">
+          <div>
+            <strong>+ Add Activity Photos</strong>
+            <span>Drag & drop or tap to upload</span>
+          </div>
+          <input id="activityUpload" type="file" accept="image/*" multiple onchange="uploadImages(event, 'activities')" />
+        </article>
+      </section>
+
+      <section id="educatorNote" class="educator-note educator-only">
+        <strong>Educator note:</strong> Uploads are added to the selected room and category. To permanently delete old photos, remove them from your Cloudinary Media Library.
+      </section>
+    </section>
+  </main>
+
+  <div id="lightbox" class="lightbox hidden" onclick="closeLightbox()">
+    <img id="lightboxImg" alt="Large gallery view" draggable="false" />
+  </div>
+
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
